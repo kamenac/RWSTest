@@ -13,22 +13,6 @@ namespace MoraviaTests
     public class SerializerTests
     {
         [TestMethod]
-        public void WriteXmlTest()
-        {
-            // arrange
-            var document = new Document { Text = "xmlText", Title = "xmlTitle" };
-            var serializer = new XmlDocumentSerializer();
-
-            // act
-            var serialized = serializer.Serialize(document);
-
-            // assert
-            serialized.ShouldNotBeEmpty();
-            serialized.ShouldContain("xmlText");
-        }
-
-
-        [TestMethod]
         public void ReadXmlTest()
         {
             // arrange
@@ -45,6 +29,19 @@ namespace MoraviaTests
             doc.Text.ShouldBeEquivalentTo("Text");
         }
 
+        [TestMethod]
+        public void WriteXmlTest()
+        {
+            // arrange
+            var document = new Document { Text = "xmlText", Title = "xmlTitle" };
+            var serializer = new XmlDocumentSerializer();
 
+            // act
+            var serialized = serializer.Serialize(document);
+
+            // assert
+            serialized.ShouldNotBeEmpty();
+            serialized.ShouldContain("xmlText");
+        }
     }
 }
