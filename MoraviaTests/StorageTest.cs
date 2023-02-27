@@ -20,7 +20,6 @@ namespace MoraviaTests
             content.ShouldNotBeEmpty();
         }
 
-
         [TestMethod]
         public void WriteTest()
         {

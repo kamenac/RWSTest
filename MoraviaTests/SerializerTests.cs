@@ -13,6 +13,23 @@ namespace MoraviaTests
     public class SerializerTests
     {
         [TestMethod]
+        public void ReadJsonTest()
+        {
+            // arrange
+            var serializer = new JsonDocumentSerializer();
+
+            string xml = File.ReadAllText(@"TestFiles\input.json");
+
+            // act
+            var doc = serializer.Deserialize(xml);
+
+            // assert
+            doc.ShouldNotBeNull();
+            doc.Title.ShouldBeEquivalentTo("jsonTitle");
+            doc.Text.ShouldBeEquivalentTo("jsonText");
+        }
+
+        [TestMethod]
         public void ReadXmlTest()
         {
             // arrange
@@ -25,8 +42,24 @@ namespace MoraviaTests
 
             // assert
             doc.ShouldNotBeNull();
-            doc.Title.ShouldBeEquivalentTo("Title");
-            doc.Text.ShouldBeEquivalentTo("Text");
+            doc.Title.ShouldBeEquivalentTo("xmlTitle");
+            doc.Text.ShouldBeEquivalentTo("xmlText");
+        }
+
+        [TestMethod]
+        public void WriteJsonTest()
+        {
+            // arrange
+            var document = new Document { Text = "jsonText", Title = "jsonTitle" };
+            var serializer = new JsonDocumentSerializer();
+
+            // act
+            var serialized = serializer.Serialize(document);
+
+            // assert
+            serialized.ShouldNotBeEmpty();
+            serialized.ShouldContain(document.Text);
+            serialized.ShouldContain(document.Title);
         }
 
         [TestMethod]
@@ -41,7 +74,8 @@ namespace MoraviaTests
 
             // assert
             serialized.ShouldNotBeEmpty();
-            serialized.ShouldContain("xmlText");
+            serialized.ShouldContain(document.Text);
+            serialized.ShouldContain(document.Title);
         }
     }
 }
