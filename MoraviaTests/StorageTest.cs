@@ -10,10 +10,13 @@ namespace MoraviaTests
         [TestMethod]
         public void ReadTest()
         {
+            // arrange
             var fileSystemStorage = new FileSystemStorage();
 
+            // act
             var content = fileSystemStorage.ReadFileAsString(@"TestFiles\input.xml");
 
+            // assert
             content.ShouldNotBeEmpty();
         }
 
@@ -21,8 +24,8 @@ namespace MoraviaTests
         [TestMethod]
         public void WriteTest()
         {
+            // arrange
             var fileSystemStorage = new FileSystemStorage();
-
             var content = @"<?xml version=""1.0"" encoding=""utf-8"" ?>
 <root>
   <title>Title1</title>
@@ -30,8 +33,10 @@ namespace MoraviaTests
 </root>
 ";
 
+            // act
             fileSystemStorage.Write(content, path: @"TestFiles\output.xml");
 
+            // assert
             content.ShouldNotBeEmpty();
         }
     }
