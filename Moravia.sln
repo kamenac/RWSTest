@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moravia", "Moravia\Moravia.csproj", "{D0458C5A-C640-4DC2-81BE-65A5A88A07C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moravia", "Moravia\Moravia.csproj", "{D0458C5A-C640-4DC2-81BE-65A5A88A07C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoraviaTests", "MoraviaTests\MoraviaTests.csproj", "{4E741DE6-4D83-4191-8D69-D4998CF268E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileConvertor", "FileConvertor\FileConvertor.csproj", "{8E06D064-F9C0-462C-B53F-76BCFE35CF71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{D0458C5A-C640-4DC2-81BE-65A5A88A07C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0458C5A-C640-4DC2-81BE-65A5A88A07C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0458C5A-C640-4DC2-81BE-65A5A88A07C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E741DE6-4D83-4191-8D69-D4998CF268E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E741DE6-4D83-4191-8D69-D4998CF268E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E741DE6-4D83-4191-8D69-D4998CF268E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E741DE6-4D83-4191-8D69-D4998CF268E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E06D064-F9C0-462C-B53F-76BCFE35CF71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E06D064-F9C0-462C-B53F-76BCFE35CF71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E06D064-F9C0-462C-B53F-76BCFE35CF71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E06D064-F9C0-462C-B53F-76BCFE35CF71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
+using Microsoft.Extensions.Configuration;
 using Moravia.Domain;
 using Newtonsoft.Json;
 
@@ -11,16 +12,23 @@ namespace Moravia.Homework
     {
         static void Main(string[] args)
         {
-            var sourceFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\SourceFiles\\Document1.xml");
-            var targetFileName = Path.Combine(Environment.CurrentDirectory, "..\\..\\..\\TargetFiles\\Document1.json");
+            var builder = new ConfigurationBuilder()
+                            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
+
+            var config = builder.Build();
+
+            var sourceFileName = config["SourceFileName"];
+            var targetFileName = config["TargetFileName"];
 
             string input;
             try
             {
                 using (FileStream sourceStream = File.Open(sourceFileName, FileMode.Open))
                 {
-                    var reader = new StreamReader(sourceStream);
-                    input = reader.ReadToEnd();
+                    using (var reader = new StreamReader(sourceStream))
+                    {
+                        input = reader.ReadToEnd();
+                    }
                 }
             }
             catch (Exception ex)
