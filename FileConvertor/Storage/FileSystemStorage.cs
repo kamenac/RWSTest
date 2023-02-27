@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace FileConvertor.Storage
 {
+    /// <summary>
+    /// FileSystemStorage - reads and writes to a file system
+    /// </summary>
     public class FileSystemStorage : IStorage
     {
+        /// <inheritdoc/>
         public string ReadFileAsString(string path)
         {
             using (FileStream sourceStream = File.Open(path, FileMode.Open))
@@ -20,6 +24,7 @@ namespace FileConvertor.Storage
             }
         }
 
+        /// <inheritdoc/>
         public void Write(string content, string path)
         {
             using (var targetStream = File.Open(path, FileMode.Create, FileAccess.Write))
