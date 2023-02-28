@@ -38,5 +38,23 @@ namespace MoraviaTests
             // assert
             content.ShouldNotBeEmpty();
         }
+
+        [TestMethod]
+        public void HttpStorageTest()
+        {
+            // arrange
+            var fileUrl = "https://gist.githubusercontent.com/sunilshenoy/23a3e7132c27d62599ba741bce13056a/raw/517b07fc382c843dcc7d444046d959a318695245/sample_json.json";
+
+            var httpStorage = new HttpStorage();
+
+
+            // act
+            var content = httpStorage.ReadFileAsString(fileUrl);
+
+            // assess
+            content.ShouldNotBeNull();
+            content.ShouldStartWith("{"); // it is json
+        }
+
     }
 }
