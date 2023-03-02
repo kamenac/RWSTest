@@ -12,10 +12,10 @@ namespace FileConvertor.Storage
     /// </summary>
     public class FileSystemStorage : IStorage
     {
-        /// <summary>
-        /// regular expression to match in ConverterFactory
-        /// </summary>
-        public const string MatchExpression = @"[a-zA-Z]:[\\\\\\]";
+        private const string MatchExpressionConst = @"[a-zA-Z]:[\\\\\\]";
+
+        /// <inheritdoc/>
+        public string MatchExpressionRegex => MatchExpressionConst;
 
         /// <inheritdoc/>
         public string ReadFileAsString(string path)

@@ -13,11 +13,17 @@ namespace FileConvertor.Serializers
 {
     public class XmlDocumentSerializer : IDocumentSerializer
     {
-        XmlSerializer serializer;
+        private const string MatchFileSuffixConst = "xml";
+
+        private XmlSerializer serializer;
+
         public XmlDocumentSerializer()
         {
             serializer = new XmlSerializer(typeof(Document));
         }
+
+        /// <inheritdoc/>
+        public string MatchFileSuffix => MatchFileSuffixConst;
 
         /// <inheritdoc/>
         public Document Deserialize(string input)

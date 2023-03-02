@@ -11,34 +11,38 @@ using System.Threading.Tasks;
 namespace MoraviaTests
 {
     [TestClass]
-
     public class ConverterTests
     {
-
         [TestMethod]
         public void ConverterFactoryCreateConverterTest()
         {
+            // arrange
             var factory = new ConverterFactory();
 
-            factory.Register("json", new JsonDocumentSerializer());
-            factory.Register("xml", new XmlDocumentSerializer());
-            factory.Register(FileSystemStorage.MatchExpression, new FileSystemStorage());
+            factory.RegisterSerializer(new JsonDocumentSerializer());
+            factory.RegisterSerializer(new XmlDocumentSerializer());
+            factory.RegisterStorage(new FileSystemStorage());
 
+            // act
             var converter = factory.Create(
                         @"d:\file.json",
                         @"d:\file.xml"
             );
 
+            // assert
             converter.ShouldNotBeNull();
         }
 
         [TestMethod]
         public void ConverterFactoryMissingSerializerTest()
         {
+            // arrange
             var factory = new ConverterFactory();
 
-            factory.Register("json", new JsonDocumentSerializer());
-            factory.Register(FileSystemStorage.MatchExpression, new FileSystemStorage());
+            factory.RegisterSerializer(new JsonDocumentSerializer());
+            factory.RegisterStorage(new FileSystemStorage());
+
+            // act and assert
 
             Should.Throw<ArgumentException>(() =>
             {
@@ -46,50 +50,59 @@ namespace MoraviaTests
                             @"d:\file.json",
                             @"d:\file.xml" // there is no xml serializer registered
                 );
-
             });
         }
 
         [TestMethod]
         public void ConverterTest()
         {
+            // arrange
             var factory = new ConverterFactory();
 
-            factory.Register("json", new JsonDocumentSerializer());
-            factory.Register("xml", new XmlDocumentSerializer());
-            factory.Register(FileSystemStorage.MatchExpression, new FileSystemStorage());
+            factory.RegisterSerializer(new JsonDocumentSerializer());
+            factory.RegisterSerializer(new XmlDocumentSerializer());
+            factory.RegisterStorage(new FileSystemStorage());
 
             var inputPath = Path.GetFullPath(@"TestFiles\input.json");
             var outputPath = Path.GetFullPath(@"TestFiles\output.xml");
 
+
+            // act
             var converter = factory.Create(
                         inputPath,
                         outputPath
             );
 
-            converter.Convert(inputPath, outputPath);
+            // assert
+            Should.NotThrow(() =>
+            {
+                converter.Convert();
+            });
+
         }
 
         [TestMethod]
         public void HttpStorageConverterFactoryTest()
         {
+            // arrange
             var factory = new ConverterFactory();
 
-            factory.Register("json", new JsonDocumentSerializer());
-            factory.Register("xml", new XmlDocumentSerializer());
-            factory.Register(FileSystemStorage.MatchExpression, new FileSystemStorage());
-            factory.Register(HttpStorage.MatchExpression, new HttpStorage());
+            factory.RegisterSerializer(new JsonDocumentSerializer());
+            factory.RegisterSerializer(new XmlDocumentSerializer());
+            factory.RegisterStorage(new FileSystemStorage());
+            factory.RegisterStorage(new HttpStorage());
 
             var inputPath = "https://gist.githubusercontent.com/sunilshenoy/23a3e7132c27d62599ba741bce13056a/raw/517b07fc382c843dcc7d444046d959a318695245/sample_json.json";
             var outputPath = Path.GetFullPath(@"TestFiles\output.xml");
 
+            // act 
             var converter = factory.Create(
                         inputPath,
                         outputPath
             );
 
+            // assert
             converter.ShouldNotBeNull();
         }
-
     }
 }

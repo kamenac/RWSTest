@@ -12,11 +12,12 @@ namespace FileConvertor.Storage
     /// </summary>
     public class HttpStorage : IStorage
     {
-        /// <summary>
-        /// regular expression to match in ConverterFactory
-        /// </summary>
-        public const string MatchExpression = "^(http|https):";
+        private const string MatchExpressionConst = "^(http|https):";
 
+        /// <inheritdoc/>
+        public string MatchExpressionRegex => MatchExpressionConst;
+
+        /// <inheritdoc/>
         public string ReadFileAsString(string path)
         {
             using (var client = new HttpClient())
@@ -27,6 +28,7 @@ namespace FileConvertor.Storage
             }
         }
 
+        /// <inheritdoc/>
         public void Write(string content, string path)
         {
             throw new NotImplementedException();

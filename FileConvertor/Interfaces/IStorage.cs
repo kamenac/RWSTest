@@ -9,6 +9,12 @@ namespace FileConvertor.Interfaces
     public interface IStorage
     {
         /// <summary>
+        /// regular expression to match in ConverterFactory
+        /// </summary>
+        string MatchExpressionRegex { get; }
+
+
+        /// <summary>
         /// Reads the content of a file and returns it as a string.
         /// </summary>
         /// <param name="path">path to the file</param>

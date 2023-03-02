@@ -10,6 +10,10 @@ namespace FileConvertor.Converter
 {
     public class Converter : IConverter
     {
+        private readonly string inputPath;
+
+        private readonly string outputPath;
+
         private IDocumentSerializer inputSerializer;
 
         private IStorage inputStorage;
@@ -22,16 +26,20 @@ namespace FileConvertor.Converter
             IStorage inputStorage,
             IStorage outputStorage,
             IDocumentSerializer inputSerializer,
-            IDocumentSerializer outputSerializer)
+            IDocumentSerializer outputSerializer,
+            string inputPath,
+            string outputPath)
         {
             this.inputStorage = inputStorage;
             this.outputStorage = outputStorage;
             this.inputSerializer = inputSerializer;
             this.outputSerializer = outputSerializer;
+            this.inputPath = inputPath;
+            this.outputPath = outputPath;
         }
 
         /// <inheritdoc/>
-        public void Convert(string inputPath, string outputPath)
+        public void Convert()
         {
             var inputString = inputStorage.ReadFileAsString(inputPath);
 

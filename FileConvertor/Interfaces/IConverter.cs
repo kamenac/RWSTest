@@ -12,10 +12,8 @@ namespace FileConvertor.Interfaces
     public interface IConverter
     {
         /// <summary>
-        /// Converts files between formats
+        /// Converts files between formats according to the converter setup
         /// </summary>
-        /// <param name="inputPath">input file path</param>
-        /// <param name="outputPath">output file path</param>
-        void Convert(string inputPath, string outputPath);
+        void Convert();
     }
 }

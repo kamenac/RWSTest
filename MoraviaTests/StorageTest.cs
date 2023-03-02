@@ -47,7 +47,6 @@ namespace MoraviaTests
 
             var httpStorage = new HttpStorage();
 
-
             // act
             var content = httpStorage.ReadFileAsString(fileUrl);
 
