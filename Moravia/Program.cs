@@ -13,11 +13,11 @@ namespace Moravia.Homework
     {
         static void Main(string[] args)
         {
-            var builder = new ConfigurationBuilder()
-                            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
-
             // todo: move configuration to a command line via:
             // https://www.nuget.org/packages/Microsoft.Extensions.Configuration.CommandLine/8.0.0-preview.1.23110.8
+
+            var builder = new ConfigurationBuilder()
+                            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
 
             var config = builder.Build();
 

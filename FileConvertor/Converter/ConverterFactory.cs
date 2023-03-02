@@ -77,6 +77,16 @@ namespace FileConvertor.Converter
         /// <returns></returns>
         public IConverter Create(string inputPath, string outputPath)
         {
+            if (string.IsNullOrEmpty(inputPath)) // todo: use something like https://github.com/ardalis/guardclauses ?
+            {
+                throw new ArgumentException("Input path can't be empty.");
+            }
+
+            if (string.IsNullOrEmpty(outputPath))
+            {
+                throw new ArgumentException("Output path can't be empty.");
+            }
+
             var inputStorage = GetStorageByPath(inputPath);
             var outputStorage = GetStorageByPath(outputPath);
 
@@ -94,7 +104,7 @@ namespace FileConvertor.Converter
         /// <param name="serializer"></param>
         public void RegisterSerializer(IDocumentSerializer serializer)
         {
-            serializers.Add(serializer.MatchFileSuffix, serializer);
+            serializers.Add(serializer.MatchFileSuffix, serializer); // todo: check for duplicates
         }
 
         /// <summary>
@@ -103,13 +113,16 @@ namespace FileConvertor.Converter
         /// <param name="storage"></param>
         public void RegisterStorage(IStorage storage)
         {
-            storages.Add(storage.MatchExpressionRegex, storage);
+            storages.Add(storage.MatchExpressionRegex, storage); // todo: check for duplicates
         }
 
 
+        /// <summary>
+        /// Automatically registers all the available serializers and storages
+        /// </summary>
         public void RegisterAll()
         {
-            var serializerTypes = Assembly.GetAssembly(typeof(IConverter))?.GetTypes() // load all available unit types
+            var serializerTypes = Assembly.GetAssembly(typeof(IConverter)).GetTypes() // load all available serializer types
                 .Where(type => typeof(IDocumentSerializer).IsAssignableFrom(type)
                         && !type.IsInterface
                         && !type.IsAbstract);
@@ -120,9 +133,8 @@ namespace FileConvertor.Converter
                 RegisterSerializer(instance);
             }
 
-
-            var storageTypes = Assembly.GetAssembly(typeof(IConverter))?.GetTypes() // load all available unit types
-                .Where(type => typeof(IDocumentSerializer).IsAssignableFrom(type)
+            var storageTypes = Assembly.GetAssembly(typeof(IConverter)).GetTypes() // load all available unit types
+                .Where(type => typeof(IStorage).IsAssignableFrom(type)
                         && !type.IsInterface
                         && !type.IsAbstract);
 
